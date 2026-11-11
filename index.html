@@ -49,6 +49,9 @@ nav .wrap{display:flex;justify-content:space-between;align-items:center;height:7
 .links a{position:relative;padding:4px 0}
 .links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
 .links a:hover::after{transform:scaleX(1);transform-origin:left}
+.links a{transition:color .3s}
+.links a.current{color:var(--ink)}
+.links a.current::after{transform:scaleX(1);transform-origin:left;background:var(--accent);height:1.5px}
 @media(max-width:860px){.links{display:none}}
 .ctrls{display:flex;align-items:center;gap:10px}
 .lang{display:flex;font-size:.8rem;font-weight:600}
@@ -383,6 +386,17 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 /* ---- Линия под шапкой при прокрутке ---- */
 const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10),{passive:true});
+
+/* ---- Подсветка пункта меню для текущего раздела ---- */
+const navLinks=[...document.querySelectorAll('.links a')];
+const secs=navLinks.map(a=>document.querySelector(a.getAttribute('href')));
+function spy(){
+  let cur=-1;
+  secs.forEach((sec,i)=>{if(sec.getBoundingClientRect().top<=innerHeight*0.35)cur=i});
+  if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)cur=secs.length-1;
+  navLinks.forEach((a,i)=>a.classList.toggle('current',i===cur));
+}
+addEventListener('scroll',spy,{passive:true});addEventListener('resize',spy);spy();
 </script>
 </body>
 </html>
