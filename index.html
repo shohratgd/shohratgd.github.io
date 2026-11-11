@@ -56,10 +56,10 @@ nav .wrap{display:flex;justify-content:space-between;align-items:center;height:7
 /* нижняя панель навигации — только на телефоне */
 .dock{display:none}
 @media(max-width:860px){
-  .dock{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;top:auto;left:0;right:0;bottom:0;z-index:30;
+  .dock{display:grid;grid-template-columns:.8fr 1.25fr .9fr 1fr;position:fixed;top:auto;left:0;right:0;bottom:0;z-index:30;
     background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);transition:background-color .4s}
-  .dock a{position:relative;text-align:center;padding:15px 4px 14px;font-size:.84rem;font-weight:500;color:var(--muted);transition:color .3s}
+  .dock a{position:relative;text-align:center;padding:15px 2px 14px;font-size:.8rem;white-space:nowrap;font-weight:500;color:var(--muted);transition:color .3s}
   .dock a+a{border-left:1px solid var(--line)}
   .dock a::before{content:"";position:absolute;left:28%;right:28%;top:-1px;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .4s var(--ease)}
   .dock a.current{color:var(--ink)}
@@ -189,6 +189,7 @@ body.switching [data-i18n]{opacity:0}
     <a href="#" class="brand" data-i18n="name">Shohrat Geldiyev</a>
     <div class="nav-r">
       <div class="links">
+        <a href="#top" data-i18n="n0">Profile</a>
         <a href="#expertise" data-i18n="n1">Expertise</a>
         <a href="#experience" data-i18n="n2">Experience</a>
         <a href="#contact" data-i18n="n3">Contact</a>
@@ -206,7 +207,7 @@ body.switching [data-i18n]{opacity:0}
   </div>
 </nav>
 
-<nav class="dock" aria-label="Sections"><a href="#expertise" data-i18n="n1">Expertise</a><a href="#experience" data-i18n="n2">Experience</a><a href="#contact" data-i18n="n3">Contact</a></nav>
+<nav class="dock" aria-label="Sections"><a href="#top" data-i18n="n0">Profile</a><a href="#expertise" data-i18n="n1">Expertise</a><a href="#experience" data-i18n="n2">Experience</a><a href="#contact" data-i18n="n3">Contact</a></nav>
 
 <header class="hero" id="top">
   <div class="wrap">
@@ -305,7 +306,7 @@ body.switching [data-i18n]{opacity:0}
 
 <script>
 const T={
- en:{name:"Shohrat Geldiyev",title:"Shohrat Geldiyev — Procurement Engineer",n1:"Expertise",n2:"Experience",n3:"Contact",
+ en:{name:"Shohrat Geldiyev",title:"Shohrat Geldiyev — Procurement Engineer",n0:"Profile",n1:"Expertise",n2:"Experience",n3:"Contact",
   kicker:"Ashgabat, Turkmenistan",role:"Procurement Engineer",
   lead:"Procurement engineer with 4+ years of experience in international procurement for customers in oil &amp; gas, construction and energy, and a degree in electrical engineering.",
   cv:"Download CV",contact:"Get in touch",avail:"Available",availt:"Open to relocation",
@@ -325,7 +326,7 @@ const T={
   j2l:"<li>Layout drawings for electrical equipment, sockets, lighting and cable routes of industrial buildings in AutoCAD.</li><li>Prepared specifications of equipment and materials.</li>",
   edu:"Education",e1t:"Power Supply",e1o:"Yagshygeldi Kakayev International Oil and Gas University · Specialist degree (5 years), qualification: Electrical Engineer",
   c_k:"Contact",c_h:"Let’s discuss how I can support your team.",ph:"Phone",cvf:"CV",loc:"Ashgabat, Turkmenistan"},
- de:{name:"Shohrat Geldiyev",title:"Shohrat Geldiyev — Einkaufsingenieur",n1:"Kompetenzen",n2:"Werdegang",n3:"Kontakt",
+ de:{name:"Shohrat Geldiyev",title:"Shohrat Geldiyev — Einkaufsingenieur",n0:"Profil",n1:"Kompetenzen",n2:"Werdegang",n3:"Kontakt",
   kicker:"Aschgabat, Turkmenistan",role:"Einkaufsingenieur",
   lead:"Einkaufsingenieur mit über 4 Jahren Erfahrung in der internationalen Beschaffung für Kunden in Öl &amp; Gas, Bau und Energie sowie einem Abschluss als Elektroingenieur.",
   cv:"Lebenslauf herunterladen",contact:"Kontakt aufnehmen",avail:"Verfügbar",availt:"Offen für Umzug",
@@ -345,7 +346,7 @@ const T={
   j2l:"<li>Erstellung von Plänen für elektrische Anlagen, Steckdosen, Beleuchtung und Kabeltrassen von Industriegebäuden in AutoCAD.</li><li>Erstellung von Geräte- und Materialspezifikationen.</li>",
   edu:"Ausbildung",e1t:"Elektrische Energieversorgung",e1o:"Internationale Jagschigeldi-Kakajew-Universität für Erdöl und -Gas · Spezialist-Abschluss (5 Jahre), Qualifikation: Elektroingenieur",
   c_k:"Kontakt",c_h:"Lassen Sie uns besprechen, wie ich Ihr Team unterstützen kann.",ph:"Telefon",cvf:"Lebenslauf",loc:"Aschgabat, Turkmenistan"},
- ru:{name:"Шохрат Гельдыев",title:"Шохрат Гельдыев — Инженер по снабжению",n1:"Компетенции",n2:"Опыт",n3:"Контакты",
+ ru:{name:"Шохрат Гельдыев",title:"Шохрат Гельдыев — Инженер по снабжению",n0:"Профиль",n1:"Компетенции",n2:"Опыт",n3:"Контакты",
   kicker:"Ашхабад, Туркменистан",role:"Инженер по снабжению",
   lead:"Инженер по снабжению с опытом более 4 лет в международных закупках для заказчиков в нефтегазе, строительстве и энергетике и дипломом инженера-электрика.",
   cv:"Скачать резюме",contact:"Связаться",avail:"Доступен",availt:"Готов к переезду",
@@ -407,7 +408,7 @@ const navLinks=[...document.querySelectorAll('.links a')];
 const dockLinks=[...document.querySelectorAll('.dock a')];
 const secs=navLinks.map(a=>document.querySelector(a.getAttribute('href')));
 function spy(){
-  let cur=-1;
+  let cur=0;
   secs.forEach((sec,i)=>{if(sec.getBoundingClientRect().top<=innerHeight*0.35)cur=i});
   if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)cur=secs.length-1;
   navLinks.forEach((a,i)=>a.classList.toggle('current',i===cur));
