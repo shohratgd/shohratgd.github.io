@@ -14,7 +14,9 @@
 /* Тема выбирается ДО отрисовки, чтобы не было вспышки */
 (function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}
 if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}
-document.documentElement.setAttribute('data-theme',t)})();
+document.documentElement.setAttribute('data-theme',t);
+var m=document.createElement('meta');m.name='theme-color';m.content=t==='dark'?'#0f1216':'#faf9f7';document.head.appendChild(m);
+var cs=document.querySelector('meta[name="color-scheme"]');if(cs)cs.content=t})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -34,6 +36,7 @@ document.documentElement.setAttribute('data-theme',t)})();
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
+html{background:var(--bg);transition:background-color .4s ease}
 body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;
   transition:background-color .4s ease,color .4s ease}
 a{color:inherit;text-decoration:none}
@@ -381,9 +384,15 @@ const root=document.documentElement;
 const mq=matchMedia('(prefers-color-scheme: dark)');
 function saved(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function save(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function applyTheme(t){
+  root.setAttribute('data-theme',t);
+  /* цвет системной панели телефона и браузера — в цвет сайта */
+  const tc=document.querySelector('meta[name="theme-color"]');if(tc)tc.content=t==='dark'?'#0f1216':'#faf9f7';
+  const cs=document.querySelector('meta[name="color-scheme"]');if(cs)cs.content=t;
+}
 document.querySelectorAll('.theme').forEach(tb=>tb.addEventListener('click',()=>{
-  const t=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',t);save('theme',t)}));
-mq.addEventListener('change',e=>{if(!saved('theme'))root.setAttribute('data-theme',e.matches?'dark':'light')});
+  const t=root.getAttribute('data-theme')==='dark'?'light':'dark';applyTheme(t);save('theme',t)}));
+mq.addEventListener('change',e=>{if(!saved('theme'))applyTheme(e.matches?'dark':'light')});
 
 /* ---- Язык: по языку браузера, вручную — запоминается ---- */
 function setLang(l,anim){
