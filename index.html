@@ -54,19 +54,20 @@ nav .wrap{display:flex;justify-content:space-between;align-items:center;height:7
 .links a{transition:color .3s}
 .links a.current{color:var(--ink)}
 .links a.current::after{transform:scaleX(1);transform-origin:left;background:var(--accent);height:1.5px}
-@media(max-width:860px){.links{display:none}}
-/* нижняя панель навигации — только на телефоне */
-.dock{display:none}
+/* телефон: вместо имени — меню разделов, язык одной кнопкой */
 @media(max-width:860px){
-  .dock{display:grid;grid-template-columns:.8fr 1.25fr .9fr 1fr;position:fixed;top:auto;left:0;right:0;bottom:0;z-index:30;
-    background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);transition:background-color .4s}
-  .dock a{position:relative;text-align:center;padding:15px 2px 14px;font-size:.8rem;white-space:nowrap;font-weight:500;color:var(--muted);transition:color .3s}
-  .dock a+a{border-left:1px solid var(--line)}
-  .dock a::before{content:"";position:absolute;left:28%;right:28%;top:-1px;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .4s var(--ease)}
-  .dock a.current{color:var(--ink)}
-  .dock a.current::before{transform:scaleX(1)}
-  body{padding-bottom:calc(52px + env(safe-area-inset-bottom))}
+  nav .wrap{height:60px;gap:8px;padding:0 14px}
+  html{scroll-padding-top:72px}
+  .brand{display:none}
+  .nav-r{flex:1;min-width:0;gap:8px;justify-content:space-between}
+  .links{flex:1;min-width:0;gap:clamp(7px,2.4vw,11px);font-size:clamp(.68rem,3.15vw,.79rem);white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+  .links::-webkit-scrollbar{display:none}
+  .links a{padding:6px 0}
+  nav .ctrls{gap:6px;flex-shrink:0}
+  nav .lang span,nav .lang button:not(.active){display:none}
+  nav .lang button{border:1px solid var(--line);border-radius:50%;width:34px;height:34px;padding:0;font-size:.72rem;color:var(--ink)}
+  nav .lang button.active::after{display:none}
+  nav .theme{width:34px;height:34px}
 }
 .ctrls{display:flex;align-items:center;gap:10px}
 .lang{display:flex;font-size:.8rem;font-weight:600}
@@ -209,8 +210,6 @@ body.switching [data-i18n]{opacity:0}
   </div>
 </nav>
 
-<nav class="dock" aria-label="Sections"><a href="#top" data-i18n="n0">Profile</a><a href="#expertise" data-i18n="n1">Expertise</a><a href="#experience" data-i18n="n2">Experience</a><a href="#contact" data-i18n="n3">Contact</a></nav>
-
 <header class="hero" id="top">
   <div class="wrap">
     <div class="hero-grid">
@@ -270,12 +269,12 @@ body.switching [data-i18n]{opacity:0}
     <div class="sh"><h2 class="serif rv" data-i18n="h_cv">Experience &amp; education</h2></div>
     <div class="cv">
       <div class="cv-row rv">
-        <div class="y">08/2022 — 08/2026</div>
+        <div class="y">08/2022 — 10/2026</div>
         <div><h3 data-i18n="j1t">Procurement Engineer</h3><div class="org" data-i18n="j1o">“Wepadar Dostlar” Individual Enterprise · Ashgabat, Turkmenistan</div>
           <ul data-i18n="j1l"></ul></div>
       </div>
       <div class="cv-row rv">
-        <div class="y">01/2022 — 07/2022</div>
+        <div class="y">01/2022 — 06/2022</div>
         <div><h3 data-i18n="j2t">Electrical Design Intern</h3><div class="org" data-i18n="j2o">“Kuwwatly Energiya Hyzmat” Economic Society · Ashgabat, Turkmenistan</div>
           <ul data-i18n="j2l"></ul></div>
       </div>
@@ -295,7 +294,6 @@ body.switching [data-i18n]{opacity:0}
       <a class="mail" href="mailto:shohratgd@gmail.com">shohratgd@gmail.com</a>
     </div>
     <div class="clist rv d1">
-      <a href="tel:+99365818938"><span data-i18n="ph">Phone</span><span>+993 65 81 89 38</span></a>
       <!-- WhatsApp: в ссылке wa.me номер пишется только цифрами, с кодом страны, без + и пробелов -->
       <a href="https://wa.me/99365818938" target="_blank"><span>WhatsApp</span><span>+993 65 81 89 38 ↗</span></a>
       <a href="https://www.linkedin.com/in/shohratgeldiyev/" target="_blank"><span>LinkedIn</span><span>/in/shohratgeldiyev ↗</span></a>
@@ -389,7 +387,12 @@ function setLang(l,anim){
   document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
   if(anim&&!reduced){document.body.classList.add('switching');setTimeout(apply,250)}else apply();
 }
-document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{save('lang',b.dataset.lang);setLang(b.dataset.lang,true)}));
+const LANGS=['en','de','ru'];
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{
+  /* на телефоне видна одна кнопка: нажатие переключает на следующий язык */
+  let l=b.dataset.lang;
+  if(matchMedia('(max-width:860px)').matches)l=LANGS[(LANGS.indexOf(root.lang)+1)%LANGS.length];
+  save('lang',l);setLang(l,true)}));
 let lang=saved('lang');
 if(!T[lang]){lang='en';for(const n of (navigator.languages||[navigator.language||'en'])){const c=(n||'').slice(0,2).toLowerCase();if(T[c]){lang=c;break}}}
 setLang(lang,false);
@@ -407,14 +410,13 @@ addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10),{passi
 
 /* ---- Подсветка пункта меню для текущего раздела ---- */
 const navLinks=[...document.querySelectorAll('.links a')];
-const dockLinks=[...document.querySelectorAll('.dock a')];
 const secs=navLinks.map(a=>document.querySelector(a.getAttribute('href')));
 function spy(){
   let cur=0;
   secs.forEach((sec,i)=>{if(sec.getBoundingClientRect().top<=innerHeight*0.35)cur=i});
   if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)cur=secs.length-1;
   navLinks.forEach((a,i)=>a.classList.toggle('current',i===cur));
-  dockLinks.forEach((a,i)=>a.classList.toggle('current',i===cur));
+  const box=document.querySelector('.links'),c=navLinks[cur];if(box.scrollWidth>box.clientWidth&&c)box.scrollTo({left:c.offsetLeft-box.offsetLeft-20,behavior:'smooth'});
 }
 addEventListener('scroll',spy,{passive:true});addEventListener('resize',spy);spy();
 </script>
