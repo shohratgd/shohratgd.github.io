@@ -58,23 +58,23 @@ nav .wrap{display:flex;justify-content:space-between;align-items:center;height:7
 .links a.current::after{transform:scaleX(1);transform-origin:left;background:var(--accent);height:1.5px}
 /* телефон: вместо имени — меню разделов, язык одной кнопкой */
 @media(max-width:860px){
-  nav .wrap{height:60px;gap:8px;padding:0 14px}
+  nav .wrap{height:60px;gap:8px;padding:0 12px}
   html{scroll-padding-top:72px}
   .brand{display:none}
   .nav-r{flex:1;min-width:0;gap:8px;justify-content:space-between}
-  .links{flex:1;min-width:0;gap:clamp(7px,2.4vw,11px);font-size:clamp(.68rem,3.15vw,.79rem);white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+  .links{flex:1;min-width:0;gap:clamp(5px,2vw,9px);font-size:clamp(.7rem,3.45vw,.86rem);white-space:nowrap;overflow-x:auto;scrollbar-width:none}
   .links::-webkit-scrollbar{display:none}
   .links a{padding:6px 0}
-  nav .ctrls{gap:6px;flex-shrink:0}
+  nav .ctrls{gap:5px;flex-shrink:0}
   nav .lang span{display:none}
   nav .lang{position:relative}
   nav .lang button:not(.active){position:absolute;left:0;top:0;z-index:-1;opacity:0;pointer-events:none;
     transition:transform .35s var(--ease),opacity .25s}
-  nav .lang.open button:not(.active){opacity:1;pointer-events:auto;transform:translateY(calc(var(--i) * 42px));box-shadow:0 4px 14px rgba(0,0,0,.12)}
-  nav .lang button{border:1px solid var(--line);border-radius:50%;width:34px;height:34px;padding:0;font-size:.72rem;color:var(--ink);background:var(--bg)}
+  nav .lang.open button:not(.active){opacity:1;pointer-events:auto;transform:translateY(calc(var(--i) * 40px));box-shadow:0 4px 14px rgba(0,0,0,.12)}
+  nav .lang button{border:1px solid var(--line);border-radius:50%;width:32px;height:32px;padding:0;font-size:.7rem;color:var(--ink);background:var(--bg)}
   nav .lang.open button.active{border-color:var(--accent)}
   nav .lang button.active::after{display:none}
-  nav .theme{width:34px;height:34px}
+  nav .theme{width:32px;height:32px}
 }
 .ctrls{display:flex;align-items:center;gap:10px}
 .lang{display:flex;font-size:.8rem;font-weight:600}
@@ -163,9 +163,9 @@ section{padding:96px 0}
 
 /* Контакт */
 .contact{background:var(--surface);border-top:1px solid var(--line);transition:background-color .4s}
-.contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:end}
+.contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:start}
 @media(max-width:860px){.contact-grid{grid-template-columns:1fr;gap:36px}}
-.contact h2{font-size:clamp(2.2rem,4.6vw,3.6rem);line-height:1.1;margin:14px 0 22px}
+.contact h2{font-size:clamp(2.2rem,4.6vw,3.6rem);line-height:1.1;margin:14px 0 0}
 .contact .mail{font-family:var(--serif);font-size:clamp(1.3rem,2.4vw,1.8rem);position:relative;display:inline-block}
 .contact .mail::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:var(--ink);transform-origin:left;transition:transform .5s var(--ease)}
 .contact .mail:hover::after{transform:scaleX(.3)}
@@ -298,9 +298,9 @@ body.switching [data-i18n]{opacity:0}
     <div class="rv">
       <div class="label" data-i18n="c_k">Contact</div>
       <h2 class="serif" data-i18n="c_h">Let’s discuss how I can support your team.</h2>
-      <a class="mail" href="mailto:shohratgd@gmail.com">shohratgd@gmail.com</a>
     </div>
     <div class="clist rv d1">
+      <a class="mail-row" href="mailto:shohratgd@gmail.com"><span>Email</span><span>shohratgd@gmail.com</span></a>
       <!-- WhatsApp: в ссылке wa.me номер пишется только цифрами, с кодом страны, без + и пробелов -->
       <a href="https://wa.me/99365818938" target="_blank"><span>WhatsApp</span><span>+993 65 81 89 38 ↗</span></a>
       <a href="https://www.linkedin.com/in/shohratgeldiyev/" target="_blank"><span>LinkedIn</span><span>/in/shohratgeldiyev ↗</span></a>
