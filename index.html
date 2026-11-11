@@ -29,7 +29,7 @@ document.documentElement.setAttribute('data-theme',t)})();
   --line:#272c34; --accent:#9dbbd9; --accent-ink:#0f1216; --accent-soft:#1b232d; --photo:#1d222a;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
 body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;
   transition:background-color .4s ease,color .4s ease}
 a{color:inherit;text-decoration:none}
@@ -113,8 +113,15 @@ section{padding:96px 0}
 .ex .k{font-family:var(--serif);color:var(--accent);font-size:.95rem}
 .ex h3{font-family:var(--serif);font-weight:500;font-size:1.3rem;margin:8px 0 8px}
 .ex p{color:var(--muted);font-size:.92rem}
-.tools{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:30px;font-size:.9rem;color:var(--ink2)}
-.tools b{font-weight:600;color:var(--ink);margin-right:6px}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);margin-top:-1px;position:relative;z-index:1;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+@media(max-width:860px){.tools{grid-template-columns:1fr}}
+.tbox{padding:28px 28px 30px 0}
+.tbox+.tbox{padding-left:28px;border-left:1px solid var(--line)}
+@media(max-width:860px){.tbox+.tbox{padding-left:0;border-left:0;border-top:1px solid var(--line)}}
+.tbox .label{margin-bottom:14px}
+.chips{display:flex;flex-direction:column;gap:6px}
+.chip{font-family:var(--serif);font-size:1.15rem;color:var(--ink);line-height:1.35}
+.chip i{font-family:var(--sans);font-style:normal;color:var(--muted);margin-left:8px;font-size:.88rem}
 
 /* Опыт */
 .cv{border-top:1px solid var(--ink)}
@@ -230,8 +237,9 @@ body.switching [data-i18n]{opacity:0}
       <div class="ex"><span class="k">06</span><h3 data-i18n="k6">Expediting &amp; logistics</h3><p data-i18n="k6d">Preparing shipping documents, coordinating with customs brokers and tracking shipments through border clearance.</p></div>
     </div>
     <div class="tools rv">
-      <span><b data-i18n="tl">Tools:</b><span data-i18n="tools">AutoCAD · MS Excel</span></span>
-      <span><b data-i18n="ll">Languages:</b><span data-i18n="langs">English (B2) · German (B1) · Russian (native) · Turkmen (native)</span></span>
+      <div class="tbox"><div class="label" data-i18n="tl">Tools</div><div class="chips" data-i18n="tools"><span class="chip">MS Office</span><span class="chip">AutoCAD</span><span class="chip">Reading technical drawings &amp; specifications</span></div></div>
+      <div class="tbox"><div class="label" data-i18n="ll">Languages</div><div class="chips" data-i18n="langs"><span class="chip">English <i>B2</i></span><span class="chip">German <i>B1</i></span><span class="chip">Russian <i>native</i></span><span class="chip">Turkmen <i>native</i></span></div></div>
+      <div class="tbox"><div class="label" data-i18n="al">Additional</div><div class="chips" data-i18n="addl"><span class="chip">Driving licence <i>category B</i></span></div></div>
     </div>
   </div>
 </section>
@@ -262,7 +270,7 @@ body.switching [data-i18n]{opacity:0}
   <div class="wrap contact-grid">
     <div class="rv">
       <div class="label" data-i18n="c_k">Contact</div>
-      <h2 class="serif" data-i18n="c_h">Let's discuss how I can support your team.</h2>
+      <h2 class="serif" data-i18n="c_h">Let’s discuss how I can support your team.</h2>
       <a class="mail" href="mailto:shohratgd@gmail.com">shohratgd@gmail.com</a>
     </div>
     <div class="clist rv d1">
@@ -291,14 +299,14 @@ const T={
   k4:"Supplier management",k4d:"Delivery and quality control, communication and claims handling.",
   k5:"Technical expertise",k5d:"Electrical engineering background: understanding specifications of electrical and industrial equipment.",
   k6:"Import &amp; logistics",k6d:"Preparing shipping documents, coordinating with customs brokers and tracking shipments through border clearance.",
-  tl:"Tools:",tools:"AutoCAD · MS Excel",ll:"Languages:",langs:"English (B2) · German (B1) · Russian (native) · Turkmen (native)",
+  tl:"Tools",tools:"<span class=\"chip\">MS Office</span><span class=\"chip\">AutoCAD</span><span class=\"chip\">Reading technical drawings &amp; specifications</span>",al:"Additional",addl:"<span class=\"chip\">Driving licence <i>category B</i></span>",ll:"Languages",langs:"<span class=\"chip\">English <i>B2</i></span><span class=\"chip\">German <i>B1</i></span><span class=\"chip\">Russian <i>native</i></span><span class=\"chip\">Turkmen <i>native</i></span>",
   h_cv:"Experience &amp; education",
   j1t:"Procurement Engineer",j1o:"“Wepadar Dostlar” Individual Enterprise · Ashgabat, Turkmenistan",
   j1l:"<li>Procurement of pipes, pumps, electrical equipment, building materials, industrial equipment and automotive spare parts for customers in oil &amp; gas, construction and energy.</li><li>Sourcing and import from 35+ suppliers in China, the UAE and Türkiye.</li><li>Prepared commercial and technical proposals for tenders.</li><li>Prepared shipping documents, coordinated with customs brokers and tracked shipments through border clearance.</li>",
   j2t:"Electrical Design Intern",j2o:"“Kuwwatly Energiya Hyzmat” Economic Society · Ashgabat, Turkmenistan",
   j2l:"<li>Electrical equipment layout drawings in AutoCAD.</li>",
   edu:"Education",e1t:"Power Supply",e1o:"Yagshygeldi Kakayev International Oil and Gas University · Specialist degree (5 years), qualification: Electrical Engineer",
-  c_k:"Contact",c_h:"Let's discuss how I can support your team.",ph:"Phone",cvf:"CV",loc:"Ashgabat, Turkmenistan"},
+  c_k:"Contact",c_h:"Let’s discuss how I can support your team.",ph:"Phone",cvf:"CV",loc:"Ashgabat, Turkmenistan"},
  de:{name:"Shohrat Geldiyev",title:"Shohrat Geldiyev — Einkaufsingenieur",n1:"Kompetenzen",n2:"Werdegang",n3:"Kontakt",
   kicker:"Aschgabat, Turkmenistan",role:"Einkaufsingenieur",
   lead:"Beschaffung und Lieferung für Kunden in Öl &amp; Gas, Bau und Energie: Rohre, Pumpen, elektrische Ausrüstung, Baumaterialien, Industrieanlagen und Kfz-Ersatzteile — von der internationalen Lieferantensuche bis zur Lieferung.",
@@ -311,7 +319,7 @@ const T={
   k4:"Lieferantenmanagement",k4d:"Liefer- und Qualitätskontrolle, Kommunikation und Reklamationen.",
   k5:"Technisches Know-how",k5d:"Elektrotechnischer Hintergrund: Verständnis der Spezifikationen elektrischer und industrieller Ausrüstung.",
   k6:"Import &amp; Logistik",k6d:"Zusammenstellung der Versanddokumente, Abstimmung mit Zollagenten und Sendungsverfolgung bis zur Grenzabfertigung.",
-  tl:"Tools:",tools:"AutoCAD · MS Excel",ll:"Sprachen:",langs:"Englisch (gute Kenntnisse, B2) · Deutsch (erweiterte Grundkenntnisse, B1) · Russisch (Muttersprache) · Turkmenisch (Muttersprache)",
+  tl:"Tools",tools:"<span class=\"chip\">MS Office</span><span class=\"chip\">AutoCAD</span><span class=\"chip\">Lesen technischer Zeichnungen &amp; Spezifikationen</span>",al:"Sonstiges",addl:"<span class=\"chip\">Führerschein <i>Klasse B</i></span>",ll:"Sprachen",langs:"<span class=\"chip\">Englisch <i>gute Kenntnisse, B2</i></span><span class=\"chip\">Deutsch <i>erweiterte Grundkenntnisse, B1</i></span><span class=\"chip\">Russisch <i>Muttersprache</i></span><span class=\"chip\">Turkmenisch <i>Muttersprache</i></span>",
   h_cv:"Werdegang &amp; Ausbildung",
   j1t:"Einkaufsingenieur",j1o:"„Wepadar Dostlar“ Einzelunternehmen · Aschgabat, Turkmenistan",
   j1l:"<li>Beschaffung von Rohren, Pumpen, elektrischer Ausrüstung, Baumaterialien, Industrieanlagen und Kfz-Ersatzteilen für Kunden in Öl &amp; Gas, Bau und Energie.</li><li>Lieferantensuche und Import von über 35 Lieferanten aus China, den VAE und der Türkei.</li><li>Erstellung kaufmännischer und technischer Angebote für Ausschreibungen.</li><li>Zusammenstellung der Versanddokumente, Abstimmung mit Zollagenten und Sendungsverfolgung bis zur Grenzabfertigung.</li>",
@@ -331,7 +339,7 @@ const T={
   k4:"Работа с поставщиками",k4d:"Контроль сроков и качества поставок, коммуникация, претензии.",
   k5:"Техническая экспертиза",k5d:"Инженерное образование: понимание спецификаций электрического и промышленного оборудования.",
   k6:"Импорт и логистика",k6d:"Подготовка документов на груз, работа с таможенными брокерами и контроль прохождения границы.",
-  tl:"Инструменты:",tools:"AutoCAD · MS Excel",ll:"Языки:",langs:"Английский (B2) · Немецкий (B1) · Русский (родной) · Туркменский (родной)",
+  tl:"Инструменты",tools:"<span class=\"chip\">MS Office</span><span class=\"chip\">AutoCAD</span><span class=\"chip\">Чтение технических чертежей и спецификаций</span>",al:"Дополнительно",addl:"<span class=\"chip\">Водительские права <i>категория B</i></span>",ll:"Языки",langs:"<span class=\"chip\">Английский <i>B2</i></span><span class=\"chip\">Немецкий <i>B1</i></span><span class=\"chip\">Русский <i>родной</i></span><span class=\"chip\">Туркменский <i>родной</i></span>",
   h_cv:"Опыт и образование",
   j1t:"Инженер по снабжению",j1o:"Индивидуальное предприятие «Вепадар Достлар» · Ашхабад, Туркменистан",
   j1l:"<li>Закупка труб, насосов, электрооборудования, стройматериалов, промышленного оборудования и автозапчастей для заказчиков в нефтегазе, строительстве и энергетике.</li><li>Поиск поставщиков и импорт от 35+ поставщиков из Китая, ОАЭ и Турции.</li><li>Готовил коммерческие и технические предложения для участия в тендерах.</li><li>Готовил документы на груз, передавал их таможенному брокеру и контролировал прохождение границы.</li>",
