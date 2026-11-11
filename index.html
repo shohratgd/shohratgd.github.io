@@ -48,11 +48,20 @@ nav .wrap{display:flex;justify-content:space-between;align-items:center;height:7
 .links{display:flex;gap:28px;font-size:.9rem;color:var(--ink2)}
 .links a{position:relative;padding:4px 0}
 .links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
-.links a:hover::after{transform:scaleX(1);transform-origin:left}
+@media(hover:hover){.links a:hover::after{transform:scaleX(1);transform-origin:left}}
 .links a{transition:color .3s}
 .links a.current{color:var(--ink)}
 .links a.current::after{transform:scaleX(1);transform-origin:left;background:var(--accent);height:1.5px}
 @media(max-width:860px){.links{display:none}}
+/* точки-навигация справа — только на телефоне */
+.dots{display:none}
+@media(max-width:860px){
+  .dots{display:flex;flex-direction:column;position:fixed;right:2px;top:50%;transform:translateY(-50%);z-index:25}
+  .dots::before{content:"";position:absolute;left:50%;top:14px;bottom:14px;width:1px;background:var(--line);transform:translateX(-50%)}
+  .dots a{position:relative;width:22px;height:28px;display:flex;align-items:center;justify-content:center}
+  .dots a::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--bg);border:1px solid var(--muted);transition:background-color .3s,border-color .3s,transform .3s}
+  .dots a.current::after{background:var(--accent);border-color:var(--accent);transform:scale(1.35)}
+}
 .ctrls{display:flex;align-items:center;gap:10px}
 .lang{display:flex;font-size:.8rem;font-weight:600}
 .lang button{background:none;border:0;color:var(--muted);font:inherit;padding:6px 8px;cursor:pointer;position:relative;transition:color .25s}
@@ -193,14 +202,16 @@ body.switching [data-i18n]{opacity:0}
   </div>
 </nav>
 
-<header class="hero">
+<nav class="dots" aria-label="Sections"><a href="#top" aria-label="Top"></a><a href="#expertise" aria-label="Expertise"></a><a href="#experience" aria-label="Experience"></a><a href="#contact" aria-label="Contact"></a></nav>
+
+<header class="hero" id="top">
   <div class="wrap">
     <div class="hero-grid">
       <div>
         <div class="label rv" data-i18n="kicker">City, Country</div>
         <h1 class="serif rv d1" data-i18n="name">Shohrat Geldiyev</h1>
         <p class="role serif rv d1" data-i18n="role">Procurement Engineer</p>
-        <p class="lead rv d2" data-i18n="lead">Procurement and supply for customers in oil &amp; gas, construction and energy: pipes, pumps, electrical equipment, building materials, industrial equipment and automotive spare parts — from international sourcing to delivery.</p>
+        <p class="lead rv d2" data-i18n="lead">Procurement engineer with 4+ years of experience in international procurement for customers in oil &amp; gas, construction and energy, and a degree in electrical engineering.</p>
         <div class="btns rv d3">
           <a class="btn solid" href="resume-en.pdf" data-cv target="_blank"><span data-i18n="cv">Download CV</span>
             <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a>
@@ -292,7 +303,7 @@ body.switching [data-i18n]{opacity:0}
 const T={
  en:{name:"Shohrat Geldiyev",title:"Shohrat Geldiyev — Procurement Engineer",n1:"Expertise",n2:"Experience",n3:"Contact",
   kicker:"Ashgabat, Turkmenistan",role:"Procurement Engineer",
-  lead:"Procurement and supply for customers in oil &amp; gas, construction and energy: pipes, pumps, electrical equipment, building materials, industrial equipment and automotive spare parts — from international sourcing to delivery.",
+  lead:"Procurement engineer with 4+ years of experience in international procurement for customers in oil &amp; gas, construction and energy, and a degree in electrical engineering.",
   cv:"Download CV",contact:"Get in touch",avail:"Available",availt:"Open to relocation",
   f1:"years in procurement",f2:"suppliers managed",f3:"import countries: China, UAE, Türkiye",f4:"industries: oil &amp; gas, construction, energy",
   h_exp:"Expertise",p_exp:"An electrical engineering degree lets me work as easily with project engineers as with suppliers — turning technical specifications into the right purchase at the right total cost.",
@@ -305,14 +316,14 @@ const T={
   tl:"Tools",tools:"<span class=\"chip\">MS Office</span><span class=\"chip\">AutoCAD</span><span class=\"chip\">Reading technical drawings &amp; specifications</span>",al:"Additional",addl:"<span class=\"chip\">Driving licence <i>category B</i></span>",ll:"Languages",langs:"<span class=\"chip\">English <i>B2</i></span><span class=\"chip\">German <i>B1</i></span><span class=\"chip\">Russian <i>native</i></span><span class=\"chip\">Turkmen <i>native</i></span>",
   h_cv:"Experience &amp; education",
   j1t:"Procurement Engineer",j1o:"“Wepadar Dostlar” Individual Enterprise · Ashgabat, Turkmenistan",
-  j1l:"<li>Procurement of pipes, pumps, electrical equipment, building materials, industrial equipment and automotive spare parts for customers in oil &amp; gas, construction and energy.</li><li>Sourcing and import from 35+ suppliers in China, the UAE and Türkiye.</li><li>Replaced a pipe supplier with a new source in China, cutting delivery time by about one month.</li><li>Found a direct distributor of truck-crane engines in the UAE, lowering the purchase price by about 20% by removing intermediaries.</li><li>Prepared commercial and technical proposals for tenders.</li><li>Prepared shipping documents, coordinated with customs brokers and tracked shipments through border clearance.</li>",
+  j1l:"<li>Procurement and import of pipes, pumps, electrical equipment, building materials, industrial equipment and automotive spare parts from 35+ suppliers in China, the UAE and Türkiye: RFQs, comparison of offers, negotiation of price, lead time and Incoterms.</li><li>Replaced a pipe supplier with a new source in China, cutting delivery time by about one month.</li><li>Found a direct distributor of truck-crane engines in the UAE, lowering the purchase price by about 20% by removing intermediaries.</li><li>Prepared commercial and technical proposals for tenders.</li><li>Prepared shipping documents, coordinated with customs brokers and tracked shipments through border clearance.</li>",
   j2t:"Electrical Design Intern",j2o:"“Kuwwatly Energiya Hyzmat” Economic Society · Ashgabat, Turkmenistan",
-  j2l:"<li>Layout drawings for electrical equipment, sockets, lighting and cable routes of industrial buildings in AutoCAD.</li><li>Prepared specifications of equipment and materials.</li><li>Worked under the supervision of a senior engineer and revised drawings.</li>",
+  j2l:"<li>Layout drawings for electrical equipment, sockets, lighting and cable routes of industrial buildings in AutoCAD.</li><li>Prepared specifications of equipment and materials.</li>",
   edu:"Education",e1t:"Power Supply",e1o:"Yagshygeldi Kakayev International Oil and Gas University · Specialist degree (5 years), qualification: Electrical Engineer",
   c_k:"Contact",c_h:"Let’s discuss how I can support your team.",ph:"Phone",cvf:"CV",loc:"Ashgabat, Turkmenistan"},
  de:{name:"Shohrat Geldiyev",title:"Shohrat Geldiyev — Einkaufsingenieur",n1:"Kompetenzen",n2:"Werdegang",n3:"Kontakt",
   kicker:"Aschgabat, Turkmenistan",role:"Einkaufsingenieur",
-  lead:"Beschaffung und Lieferung für Kunden in Öl &amp; Gas, Bau und Energie: Rohre, Pumpen, elektrische Ausrüstung, Baumaterialien, Industrieanlagen und Kfz-Ersatzteile — von der internationalen Lieferantensuche bis zur Lieferung.",
+  lead:"Einkaufsingenieur mit über 4 Jahren Erfahrung in der internationalen Beschaffung für Kunden in Öl &amp; Gas, Bau und Energie sowie einem Abschluss als Elektroingenieur.",
   cv:"Lebenslauf herunterladen",contact:"Kontakt aufnehmen",avail:"Verfügbar",availt:"Offen für Umzug",
   f1:"Jahre im Einkauf",f2:"betreute Lieferanten",f3:"Importländer: China, VAE, Türkei",f4:"Branchen: Öl &amp; Gas, Bau, Energie",
   h_exp:"Kompetenzen",p_exp:"Mein Abschluss als Elektroingenieur ermöglicht mir, ebenso gut mit Projektingenieuren wie mit Lieferanten zu arbeiten — und technische Spezifikationen in den richtigen Einkauf zu den richtigen Gesamtkosten umzusetzen.",
@@ -325,14 +336,14 @@ const T={
   tl:"Tools",tools:"<span class=\"chip\">MS Office</span><span class=\"chip\">AutoCAD</span><span class=\"chip\">Lesen technischer Zeichnungen &amp; Spezifikationen</span>",al:"Sonstiges",addl:"<span class=\"chip\">Führerschein <i>Klasse B</i></span>",ll:"Sprachen",langs:"<span class=\"chip\">Englisch <i>B2</i></span><span class=\"chip\">Deutsch <i>B1</i></span><span class=\"chip\">Russisch <i>Muttersprache</i></span><span class=\"chip\">Turkmenisch <i>Muttersprache</i></span>",
   h_cv:"Werdegang &amp; Ausbildung",
   j1t:"Einkaufsingenieur",j1o:"„Wepadar Dostlar“ Einzelunternehmen · Aschgabat, Turkmenistan",
-  j1l:"<li>Beschaffung von Rohren, Pumpen, elektrischer Ausrüstung, Baumaterialien, Industrieanlagen und Kfz-Ersatzteilen für Kunden in Öl &amp; Gas, Bau und Energie.</li><li>Lieferantensuche und Import von über 35 Lieferanten aus China, den VAE und der Türkei.</li><li>Neuen Rohrlieferanten in China gefunden und den bisherigen ersetzt: Lieferzeit um rund einen Monat verkürzt.</li><li>Direkten Distributor für Autokran-Motoren in den VAE gefunden: Einkaufspreis um rund 20 % gesenkt durch Wegfall von Zwischenhändlern.</li><li>Erstellung kaufmännischer und technischer Angebote für Ausschreibungen.</li><li>Zusammenstellung der Versanddokumente, Abstimmung mit Zollagenten und Sendungsverfolgung bis zur Grenzabfertigung.</li>",
+  j1l:"<li>Beschaffung und Import von Rohren, Pumpen, elektrischer Ausrüstung, Baumaterialien, Industrieanlagen und Kfz-Ersatzteilen von über 35 Lieferanten aus China, den VAE und der Türkei: Angebotsanfragen, Angebotsvergleich, Verhandlung von Preis, Lieferzeit und Incoterms.</li><li>Neuen Rohrlieferanten in China gefunden und den bisherigen ersetzt: Lieferzeit um rund einen Monat verkürzt.</li><li>Direkten Distributor für Autokran-Motoren in den VAE gefunden: Einkaufspreis um rund 20 % gesenkt durch Wegfall von Zwischenhändlern.</li><li>Erstellung kaufmännischer und technischer Angebote für Ausschreibungen.</li><li>Zusammenstellung der Versanddokumente, Abstimmung mit Zollagenten und Sendungsverfolgung bis zur Grenzabfertigung.</li>",
   j2t:"Praktikant Elektroplanung",j2o:"„Kuwwatly Energiya Hyzmat“ Wirtschaftsgesellschaft · Aschgabat, Turkmenistan",
-  j2l:"<li>Erstellung von Plänen für elektrische Anlagen, Steckdosen, Beleuchtung und Kabeltrassen von Industriegebäuden in AutoCAD.</li><li>Erstellung von Geräte- und Materialspezifikationen.</li><li>Arbeit unter Anleitung eines erfahrenen Ingenieurs, Überarbeitung von Zeichnungen.</li>",
+  j2l:"<li>Erstellung von Plänen für elektrische Anlagen, Steckdosen, Beleuchtung und Kabeltrassen von Industriegebäuden in AutoCAD.</li><li>Erstellung von Geräte- und Materialspezifikationen.</li>",
   edu:"Ausbildung",e1t:"Elektrische Energieversorgung",e1o:"Internationale Jagschigeldi-Kakajew-Universität für Erdöl und -Gas · Spezialist-Abschluss (5 Jahre), Qualifikation: Elektroingenieur",
   c_k:"Kontakt",c_h:"Lassen Sie uns besprechen, wie ich Ihr Team unterstützen kann.",ph:"Telefon",cvf:"Lebenslauf",loc:"Aschgabat, Turkmenistan"},
  ru:{name:"Шохрат Гельдыев",title:"Шохрат Гельдыев — Инженер по снабжению",n1:"Компетенции",n2:"Опыт",n3:"Контакты",
   kicker:"Ашхабад, Туркменистан",role:"Инженер по снабжению",
-  lead:"Закупки и поставки для заказчиков в нефтегазе, строительстве и энергетике: трубы, насосы, электрооборудование, стройматериалы, промышленное оборудование и автозапчасти — от поиска поставщиков за рубежом до поставки.",
+  lead:"Инженер по снабжению с опытом более 4 лет в международных закупках для заказчиков в нефтегазе, строительстве и энергетике и дипломом инженера-электрика.",
   cv:"Скачать резюме",contact:"Связаться",avail:"Доступен",availt:"Готов к переезду",
   f1:"года в закупках",f2:"поставщиков в работе",f3:"страны импорта: Китай, ОАЭ, Турция",f4:"отрасли: нефтегаз, строительство, энергетика",
   h_exp:"Компетенции",p_exp:"Диплом инженера-электрика позволяет мне одинаково эффективно работать и с инженерами проекта, и с поставщиками — превращая технические спецификации в правильную закупку по оптимальной цене.",
@@ -345,9 +356,9 @@ const T={
   tl:"Инструменты",tools:"<span class=\"chip\">MS Office</span><span class=\"chip\">AutoCAD</span><span class=\"chip\">Чтение технических чертежей и спецификаций</span>",al:"Дополнительно",addl:"<span class=\"chip\">Водительские права <i>категория B</i></span>",ll:"Языки",langs:"<span class=\"chip\">Английский <i>B2</i></span><span class=\"chip\">Немецкий <i>B1</i></span><span class=\"chip\">Русский <i>родной</i></span><span class=\"chip\">Туркменский <i>родной</i></span>",
   h_cv:"Опыт и образование",
   j1t:"Инженер по снабжению",j1o:"Индивидуальное предприятие «Вепадар Достлар» · Ашхабад, Туркменистан",
-  j1l:"<li>Закупка труб, насосов, электрооборудования, стройматериалов, промышленного оборудования и автозапчастей для заказчиков в нефтегазе, строительстве и энергетике.</li><li>Поиск поставщиков и импорт от 35+ поставщиков из Китая, ОАЭ и Турции.</li><li>Нашёл в Китае нового поставщика труб вместо прежнего: срок поставки сократился примерно на месяц.</li><li>Нашёл в ОАЭ прямого дистрибьютора двигателей для автокранов: закупочная цена снизилась примерно на 20% за счёт отказа от посредников.</li><li>Готовил коммерческие и технические предложения для участия в тендерах.</li><li>Готовил документы на груз, передавал их таможенному брокеру и контролировал прохождение границы.</li>",
+  j1l:"<li>Закупка и импорт труб, насосов, электрооборудования, стройматериалов, промышленного оборудования и автозапчастей от 35+ поставщиков из Китая, ОАЭ и Турции: запросы цен, сравнение предложений, переговоры о цене, сроках и Incoterms.</li><li>Нашёл в Китае нового поставщика труб вместо прежнего: срок поставки сократился примерно на месяц.</li><li>Нашёл в ОАЭ прямого дистрибьютора двигателей для автокранов: закупочная цена снизилась примерно на 20% за счёт отказа от посредников.</li><li>Готовил коммерческие и технические предложения для участия в тендерах.</li><li>Готовил документы на груз, передавал их таможенному брокеру и контролировал прохождение границы.</li>",
   j2t:"Инженер-проектировщик электрики (практика)",j2o:"Хозяйственное общество «Кувватлы энергия хызмат» · Ашхабад, Туркменистан",
-  j2l:"<li>Разработка в AutoCAD планов расположения электрооборудования, розеток, освещения и кабельных трасс промышленных зданий.</li><li>Составление спецификаций оборудования и материалов.</li><li>Работа под руководством инженера, внесение правок в чертежи.</li>",
+  j2l:"<li>Разработка в AutoCAD планов расположения электрооборудования, розеток, освещения и кабельных трасс промышленных зданий.</li><li>Составление спецификаций оборудования и материалов.</li>",
   edu:"Образование",e1t:"Электроснабжение",e1o:"Международный университет нефти и газа имени Ягшыгелди Какаева · Диплом специалиста, квалификация: инженер-электрик",
   c_k:"Контакты",c_h:"Давайте обсудим, чем я могу быть полезен вашей команде.",ph:"Телефон",cvf:"Резюме",loc:"Ашхабад, Туркменистан"}
 };
@@ -389,12 +400,14 @@ addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10),{passi
 
 /* ---- Подсветка пункта меню для текущего раздела ---- */
 const navLinks=[...document.querySelectorAll('.links a')];
+const dotLinks=[...document.querySelectorAll('.dots a')];
 const secs=navLinks.map(a=>document.querySelector(a.getAttribute('href')));
 function spy(){
   let cur=-1;
   secs.forEach((sec,i)=>{if(sec.getBoundingClientRect().top<=innerHeight*0.35)cur=i});
   if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)cur=secs.length-1;
   navLinks.forEach((a,i)=>a.classList.toggle('current',i===cur));
+  dotLinks.forEach((a,i)=>a.classList.toggle('current',i===cur+1));
 }
 addEventListener('scroll',spy,{passive:true});addEventListener('resize',spy);spy();
 </script>
